@@ -8,4 +8,4 @@ license = "ISC"
 repository = "https://github.com/abineo-ag/derive-name"
 
 [dependencies]
-derive = { path = "./derive" }
+derive = { path = "./derive", version = "*"}
