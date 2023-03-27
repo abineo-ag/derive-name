@@ -9,4 +9,4 @@ repository = "https://github.com/abineo-ag/derive-name"
 exclude = ["target", ".github"]
 
 [dependencies]
-derive = { path = "./derive", version = "*" }
+derive = { path = "./derive", version = "0.1.0" }
