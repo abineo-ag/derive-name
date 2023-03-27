@@ -1,34 +1,34 @@
 //! # Name
-//! 
+//!
 //! Derive macro to get name of type (struct/enum) as String.
-//! 
+//!
 //! ## Usage
-//! 
+//!
 //! ```
 //! use derive_name::Name;
-//! 
+//!
 //! #[derive(Name)]
 //! struct MyStruct;
-//! 
+//!
 //! assert_eq!(MyStruct::name(), "MyStruct");
 //! ```
-//! 
+//!
 //! ### Manual implementation
-//! 
+//!
 //! ```
 //! use derive_name::Name;
-//! 
+//!
 //! struct MyStruct;
-//! 
+//!
 //! impl Name for MyStruct {
 //!     fn name() -> &'static str {
 //!         "Banana"
 //!     }
 //! }
-//! 
+//!
 //! assert_eq!(MyStruct::name(), "Banana");
 //! ```
-//! 
+//!
 
 pub use derive::Name;
 
