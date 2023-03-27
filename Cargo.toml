@@ -6,6 +6,7 @@ authors = ["Christoph Schneider <christoph.schneider@abineo.com>"]
 description = "Derive macro to get name of type (struct/enum) as String."
 license = "ISC"
 repository = "https://github.com/abineo-ag/derive-name"
+exclude = ["target", ".github"]
 
 [dependencies]
-derive = { path = "./derive", version = "*"}
+derive = { path = "./derive", version = "*" }
