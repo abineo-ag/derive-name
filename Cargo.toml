@@ -1,0 +1,11 @@
+[package]
+name = "derive-name"
+version = "0.1.0"
+edition = "2021"
+authors = ["Christoph Schneider <christoph.schneider@abineo.com>"]
+description = "Derive macro to get name of type (struct/enum) as String."
+license = "ISC"
+repository = "https://github.com/abineo-ag/derive-name"
+
+[dependencies]
+derive = { path = "./derive" }

@@ -1,0 +1,14 @@
+[package]
+name = "derive"
+version = "0.1.0"
+edition = "2021"
+authors = ["Christoph Schneider <christoph.schneider@abineo.com>"]
+license = "ISC"
+
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = "2.0"
+quote = "1.0"
