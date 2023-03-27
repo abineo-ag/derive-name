@@ -30,7 +30,7 @@
 //! ```
 //!
 
-pub use derive::Name;
+pub use derive_name_macros::Name;
 
 pub trait Name {
     fn name() -> &'static str;
