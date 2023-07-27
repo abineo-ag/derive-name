@@ -7,7 +7,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
 	let ast: syn::DeriveInput = syn::parse_macro_input!(input);
     let name = &ast.ident;
 	let gen = quote! {
-		impl Name for #name {
+		impl derive_name::Name for #name {
 			fn name() -> &'static str {
 				stringify!(#name)
 			}

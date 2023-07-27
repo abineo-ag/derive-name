@@ -1,6 +1,6 @@
 //! # Name
 //!
-//! Derive macro to get name of type (struct/enum) as String.
+//! Derive macro to get the name of a struct or enum.
 //!
 //! ## Usage
 //!
@@ -8,27 +8,34 @@
 //! use derive_name::Name;
 //!
 //! #[derive(Name)]
-//! struct MyStruct;
+//! struct Alice;
 //!
-//! assert_eq!(MyStruct::name(), "MyStruct");
+//! #[derive(Name)]
+//! enum Bob {}
+//!
+//! assert_eq!(Alice::name(), "Alice");
+//! assert_eq!(Bob::name(), "Bob");
 //! ```
 //!
-//! ### Manual implementation
+//! ## Usage with [`Named`]
 //!
 //! ```
-//! use derive_name::Name;
+//! use derive_name::Named;
 //!
-//! struct MyStruct;
+//! #[derive(derive_name::Name)]
+//! struct Alice;
 //!
-//! impl Name for MyStruct {
-//!     fn name() -> &'static str {
-//!         "Banana"
-//!     }
+//! #[derive(derive_name::Name)]
+//! enum Bob {
+//!     Variant
 //! }
 //!
-//! assert_eq!(MyStruct::name(), "Banana");
-//! ```
+//! let her = Alice {};
+//! let his = Bob::Variant;
 //!
+//! assert_eq!(her.name(), "Alice");
+//! assert_eq!(his.name(), "Bob");
+//! ```
 
 pub use derive_name_macros::Name;
 
@@ -36,31 +43,20 @@ pub trait Name {
     fn name() -> &'static str;
 }
 
+pub trait Named {
+    fn name(&self) -> &'static str;
+}
+
+impl<T: Name> Named for T {
+    fn name(&self) -> &'static str {
+        T::name()
+    }
+}
+
 #[cfg(test)]
-mod tests {
+mod as_function {
     use super::Name;
-
-    struct StructManual;
-
-    impl Name for StructManual {
-        fn name() -> &'static str {
-            "success"
-        }
-    }
-
-    enum EnumManual {}
-
-    impl Name for EnumManual {
-        fn name() -> &'static str {
-            "success"
-        }
-    }
-
-    #[test]
-    fn manual() {
-        assert_eq!(StructManual::name(), "success");
-        assert_eq!(EnumManual::name(), "success");
-    }
+    use crate as derive_name;
 
     #[derive(Name)]
     struct Struct;
@@ -69,8 +65,28 @@ mod tests {
     enum Enum {}
 
     #[test]
-    fn derived() {
+    fn test() {
         assert_eq!(Struct::name(), "Struct");
         assert_eq!(Enum::name(), "Enum");
+    }
+}
+
+#[cfg(test)]
+mod as_method {
+    use super::Named;
+    use crate as derive_name;
+
+    #[derive(derive_name::Name)]
+    struct Struct;
+
+    #[derive(derive_name::Name)]
+    enum Enum {
+        A
+    }
+
+    #[test]
+    fn test() {
+        assert_eq!(Struct.name(), "Struct");
+        assert_eq!(Enum::A.name(), "Enum");
     }
 }

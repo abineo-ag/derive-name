@@ -4,7 +4,7 @@
 [![Crate](https://img.shields.io/crates/v/derive-name.svg)](https://crates.io/crates/derive-name)
 [![Docs](https://docs.rs/derive-name/badge.svg)](https://docs.rs/derive-name)
 
-Derive macro to get name of type (struct/enum) as String.
+Derive macro to get the name of a struct or enum.
 
 ## Usage
 
@@ -12,25 +12,33 @@ Derive macro to get name of type (struct/enum) as String.
 use derive_name::Name;
 
 #[derive(Name)]
-struct MyStruct;
+struct Alice;
 
-assert_eq!(MyStruct::name(), "MyStruct");
+#[derive(Name)]
+enum Bob {}
+
+assert_eq!(Alice::name(), "Alice");
+assert_eq!(Bob::name(), "Bob");
 ```
 
-### Manual implementation
+## Usage with `Named`
 
 ```rust
-use derive_name::Name;
+use derive_name::Named;
 
-struct MyStruct;
+#[derive(derive_name::Name)]
+struct Alice;
 
-impl Name for MyStruct {
-    fn name() -> &'static str {
-        "Banana"
-    }
+#[derive(derive_name::Name)]
+enum Bob {
+    Variant
 }
 
-assert_eq!(MyStruct::name(), "Banana");
+let her = Alice {};
+let his = Bob::Variant;
+
+assert_eq!(her.name(), "Alice");
+assert_eq!(his.name(), "Bob");
 ```
 
 ## Contributing

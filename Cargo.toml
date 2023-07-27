@@ -1,12 +1,12 @@
 [package]
 name = "derive-name"
-version = "0.1.2"
+version = "1.0.0"
 edition = "2021"
 authors = ["Christoph Schneider <christoph.schneider@abineo.com>"]
-description = "Derive macro to get name of type (struct/enum) as String."
+description = "Derive macro to get the name of a struct or enum"
 license = "ISC"
 repository = "https://github.com/abineo-ag/derive-name"
 exclude = ["target", ".github"]
 
 [dependencies]
-derive-name-macros = "0.1.0"
+derive-name-macros = "1"
