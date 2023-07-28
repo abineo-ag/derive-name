@@ -37,7 +37,7 @@ pub fn variant(input: TokenStream) -> TokenStream {
             };
 
             match_arms.push(parse_quote! {
-                #match_pattern => #variant_ident
+                #match_pattern => stringify!(#variant_ident)
             });
         }
         let gen = quote! {

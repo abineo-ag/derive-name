@@ -46,7 +46,7 @@
 //!     Bob
 //! }
 //!
-//! assert_eq!(Alice::Bob.name(), "Bob");
+//! assert_eq!(Alice::Bob.variant_name(), "Bob");
 //! ```
 
 pub use derive_name_macros::{Name, VariantName};
@@ -121,8 +121,8 @@ mod variant_name {
 
     #[test]
     fn test() {
-        assert_eq!(Enum::Alice.name(), "Alice");
-        assert_eq!(Enum::Bob(1).name(), "Bob");
-        assert_eq!(Enum::Claire { i: 1 }.name(), "Claire");
+        assert_eq!(Enum::Alice.variant_name(), "Alice");
+        assert_eq!(Enum::Bob(1).variant_name(), "Bob");
+        assert_eq!(Enum::Claire { i: 1 }.variant_name(), "Claire");
     }
 }
