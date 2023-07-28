@@ -1,6 +1,6 @@
 [package]
 name = "derive-name-macros"
-version = "1.0.1"
+version = "1.1.0"
 edition = "2021"
 authors = ["Christoph Schneider <christoph.schneider@abineo.com>"]
 description = "Derive macros for derive-name crate."
@@ -11,5 +11,5 @@ repository = "https://github.com/abineo-ag/derive-name"
 proc-macro = true
 
 [dependencies]
-syn = "2.0"
-quote = "1.0"
+syn = { version = "2", features = ["full"] }
+quote = "1"

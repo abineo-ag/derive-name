@@ -1,12 +1,12 @@
-# Name (derive-name)
+# Derive Name
 
 [![CI](https://github.com/abineo-ag/derive-name/actions/workflows/ci.yml/badge.svg)](https://github.com/abineo-ag/derive-name/actions/workflows/ci.yml)
 [![Crate](https://img.shields.io/crates/v/derive-name.svg)](https://crates.io/crates/derive-name)
 [![Docs](https://docs.rs/derive-name/badge.svg)](https://docs.rs/derive-name)
 
-Derive macro to get the name of a struct or enum.
+Derive macro to get the name of a struct, enum or enum variant.
 
-## Usage
+## Name
 
 ```rust
 use derive_name::Name;
@@ -21,7 +21,7 @@ assert_eq!(Alice::name(), "Alice");
 assert_eq!(Bob::name(), "Bob");
 ```
 
-## Usage with `Named`
+## Named
 
 ```rust
 use derive_name::Named;
@@ -39,6 +39,19 @@ let his = Bob::Variant;
 
 assert_eq!(her.name(), "Alice");
 assert_eq!(his.name(), "Bob");
+```
+
+## VariantName
+
+```rust
+use derive_name::VariantName;
+
+#[derive(VariantName)]
+enum Alice {
+    Variant
+}
+
+assert_eq!(Alice::Variant.name(), "Variant");
 ```
 
 ## Contributing

@@ -1,8 +1,8 @@
-//! # Name
+//! # Derive Name
 //!
-//! Derive macro to get the name of a struct or enum.
+//! Derive macro to get the name of a struct, enum or enum variant.
 //!
-//! ## Usage
+//! ## Name
 //!
 //! ```
 //! use derive_name::Name;
@@ -17,7 +17,7 @@
 //! assert_eq!(Bob::name(), "Bob");
 //! ```
 //!
-//! ## Usage with [`Named`]
+//! ## Named
 //!
 //! ```
 //! use derive_name::Named;
@@ -36,8 +36,20 @@
 //! assert_eq!(her.name(), "Alice");
 //! assert_eq!(his.name(), "Bob");
 //! ```
+//!
+//! ## VariantName
+//! ```
+//! use derive_name::VariantName;
+//!
+//! #[derive(VariantName)]
+//! enum Alice {
+//!     Bob
+//! }
+//!
+//! assert_eq!(Alice::Bob.name(), "Bob");
+//! ```
 
-pub use derive_name_macros::Name;
+pub use derive_name_macros::{Name, VariantName};
 
 pub trait Name {
     fn name() -> &'static str;
@@ -51,6 +63,10 @@ impl<T: Name> Named for T {
     fn name(&self) -> &'static str {
         T::name()
     }
+}
+
+pub trait VariantName {
+    fn variant_name(&self) -> &'static str;
 }
 
 #[cfg(test)]
@@ -81,12 +97,32 @@ mod as_method {
 
     #[derive(derive_name::Name)]
     enum Enum {
-        A
+        A,
     }
 
     #[test]
     fn test() {
         assert_eq!(Struct.name(), "Struct");
         assert_eq!(Enum::A.name(), "Enum");
+    }
+}
+
+#[cfg(test)]
+mod variant_name {
+    use super::VariantName;
+    use crate as derive_name;
+
+    #[derive(VariantName)]
+    enum Enum {
+        Alice,
+        Bob(i32),
+        Claire { i: i32 },
+    }
+
+    #[test]
+    fn test() {
+        assert_eq!(Enum::Alice.name(), "Alice");
+        assert_eq!(Enum::Bob(1).name(), "Bob");
+        assert_eq!(Enum::Claire { i: 1 }.name(), "Claire");
     }
 }
